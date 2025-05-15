@@ -1,0 +1,10 @@
+inicio
+x = 5;
+v = 2;
+r1 = x * v;
+imprimir r1;
+a = 15
+b = 20
+r2 = a <= b;
+imprimir r2;
+fin
