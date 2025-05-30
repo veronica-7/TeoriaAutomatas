@@ -16,6 +16,7 @@ regex_identificador = r'^[a-zA-Z_][a-zA-Z0-9_]*$'
 regex_numero = r'^[0-9]+$'
 regex_cadena = r'^"[^"]*"$'
 regex_decimal = r'^\d+\.\d+$'
+# comentarioooooooooooooo
 
 def analizar_token(token):
     if token in palabras_reservadas:
