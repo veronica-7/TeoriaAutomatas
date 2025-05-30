@@ -1,0 +1,8 @@
+main {
+    num edad = 25
+    boolean# 1activo = FALSE  
+    string# nombre = Juan
+    imprimir> "Hola mundo
+    double# precio = 12.5.7
+    ?? operador_invalido = 5
+} fin

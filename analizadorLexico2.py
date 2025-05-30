@@ -2,7 +2,8 @@ import re
 
 # Listas de tokens válidos
 palabras_reservadas = [
-    'main', 'fin', 'imprimir>', 'for', 'if', 'else', 'num#', 'boolean#', 'string#', 'double#', 'TRUE', 'FALSE'
+    'main', 'fin', 'imprimir>', 'for', 'if', 'else',
+    'num#', 'boolean#', 'string#', 'double#', 'TRUE', 'FALSE'
 ]
 
 # Operadores y simbolos
@@ -10,13 +11,12 @@ operadores_logicos = ['>=', '<=', '==', '!=', '>', '<', '&', '|']
 operadores_aritmeticos = ['=', '+', '-', '*', '/']
 simbolos_agrupacion = ['(', ')', '{', '}', '[', ']']
 
-
 # Expresiones regulares
-regex_identificador = r'^[a-zA-Z_][a-zA-Z0-9_]*$' # Empieza por letra o guión bajo, luego puede tener letras, números o guiones bajos. 
-regex_numero = r'^[0-9]+$' # Solo digitos
-regex_cadena = r'^"[^"]*"$' # Comienza y termina con comillas dobles.
+regex_identificador = r'^[a-zA-Z_][a-zA-Z0-9_]*$'
+regex_numero = r'^[0-9]+$'
+regex_cadena = r'^"[^"]*"$'
+regex_decimal = r'^\d+\.\d+$'
 
-# Se puede usarla sola si ya tienes una lista de tokens.
 def analizar_token(token):
     if token in palabras_reservadas:
         print(f"✔️ [OK] Palabra reservada reconocida: {token}")
@@ -26,11 +26,13 @@ def analizar_token(token):
         print(f"✔️ [OK] Operador aritmético reconocido: {token}")
     elif token in simbolos_agrupacion:
         print(f"✔️ [OK] Símbolo de agrupación reconocido: {token}")
-    elif re.fullmatch(r'\d+', token):
+    elif re.fullmatch(regex_numero, token):
         print(f"✔️ [OK] Número reconocido: {token}")
-    elif re.fullmatch(r'"[^"]*"', token):
+    elif re.fullmatch(regex_decimal, token):
+        print(f"✔️ [OK] Número decimal reconocido: {token}")
+    elif re.fullmatch(regex_cadena, token):
         print(f"✔️ [OK] Cadena reconocida: {token}")
-    elif re.fullmatch(r'[a-zA-Z_][a-zA-Z0-9_]*', token):
+    elif re.fullmatch(regex_identificador, token):
         print(f"✔️ [OK] Identificador válido: {token}")
     else:
         print(f"❌ [ERROR] Token no reconocido: {token}")
@@ -41,30 +43,35 @@ def analizar_archivo(nombre_archivo):
             print(f"Analizando el archivo: {nombre_archivo}\n")
             for num_linea, linea in enumerate(archivo, start=1):
                 print(f"Línea {num_linea}: {linea.strip()}")
-                
-                # Extraer cadenas primero y reemplazarlas con marcador temporal
+
+                # Extraer cadenas válidas primero y reemplazarlas por marcador
                 cadenas = re.findall(r'"[^"]*"', linea)
                 temp_linea = re.sub(r'"[^"]*"', 'CADENA_TEMP', linea)
 
-                tokens = re.findall(
-                    r'\"[^\"]*\"|'                         # Cadenas entre comillas                        # imprimir>
-                    r'\b(?:main|fin|for|if|else|TRUE|FALSE)\b|'      # Palabras reservadas normales
-                    r'(?:imprimir>|num#|boolean#|string#|double#)|'  # Palabras reservadas con caracter especial
-                    r'==|!=|<=|>=|[=+\-*/<>&|]|'           # Operadores
-                    r'[\(\)\{\}\[\]]|'                     # Símbolos de agrupación
-                    r'\d+|'                                # Números
-                    r'[a-zA-Z_][a-zA-Z0-9_]*'              # Identificadores
-                    , temp_linea.strip()
+                # Nueva regex: incluye tokens válidos + fallback para tokens inválidos
+                token_pattern = re.compile(
+                    r'('
+                    r'"[^"]*"|'                                     # Cadenas
+                    r'\b(?:main|fin|for|if|else|TRUE|FALSE)\b|'     # Palabras reservadas
+                    r'(?:imprimir>|num#|boolean#|string#|double#)|' # Palabras reservadas con caracteres
+                    r'==|!=|<=|>=|[=+\-*/<>&|]|'                    # Operadores
+                    r'[\(\)\{\}\[\]]|'                              # Agrupadores
+                    r'\d+\.\d+|\d+|'                                # Números
+                    r'[a-zA-Z_][a-zA-Z0-9_]*|'                      # Identificadores
+                    r'\S+'                                          # Cualquier otra secuencia no reconocida
+                    r')'
                 )
 
-                # Reinsertar las cadenas reales en los tokens
+                tokens = token_pattern.findall(temp_linea.strip())
+
+                # Reinsertar cadenas válidas en su lugar
                 cadena_idx = 0
                 for i in range(len(tokens)):
                     if tokens[i] == 'CADENA_TEMP':
                         tokens[i] = cadenas[cadena_idx]
                         cadena_idx += 1
 
-                # Llama a Analizar tokens
+                # Analizar cada token
                 for token in tokens:
                     analizar_token(token)
                 print()
@@ -72,5 +79,5 @@ def analizar_archivo(nombre_archivo):
         print(f"[ERROR] El archivo '{nombre_archivo}' no fue encontrado.")
 
 # Nombre del archivo fuente
-nombre_archivo = "prueba.txt"
+nombre_archivo = "prueba3.txt"
 analizar_archivo(nombre_archivo)

@@ -1,10 +1,10 @@
-inicio
-x = 5;
-v = 2;
-r1 = x * v;
-imprimir r1;
-a = 15
-b = 20
-r2 = a <= b;
-imprimir r2;
-fin
+main {
+    num# edad = 25
+    boolean# activo = TRUE
+    string# nombre = "Juan Pérez"
+    if (edad >= 18) {
+        imprimir> "Es mayor de edad"
+    } else {
+        imprimir> "Es menor de edad"
+    }
+} fin
