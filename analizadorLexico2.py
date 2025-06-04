@@ -18,7 +18,7 @@ regex_cadena = r'^"[^"]*"$'
 regex_decimal = r'^\d+\.\d+$'
 
 # Analiza un token, determina su tipo y muestra un mensaje correspondiente
-def analizar_token(token):
+def analizar_token(token, num_linea):
     if token in palabras_reservadas:
         print(f"✔️ [OK] Palabra reservada reconocida: '{token}'")
     elif token in operadores_logicos:
@@ -81,4 +81,5 @@ def analizar_archivo(nombre_archivo):
 
 # Nombre del archivo fuente
 nombre_archivo = "prueba2.txt"
+# nombre_archivo = "pruebaError2.txt"
 analizar_archivo(nombre_archivo)
