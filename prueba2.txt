@@ -1,7 +1,14 @@
-inicio
-x = 5;
-y = 10;
-comparar = x >= y;
-resultado = x != y;
-imprimir resultado;
-fin
+main {
+    num# x = 2
+    num# y = 10
+    num# z = 4
+
+    boolean# comparar = y >= z
+
+    if (comparar) == TRUE {
+        num# resultado = y * x
+        imprimir> resultado
+    } else { 
+        imprimir> "El valor de y es "+ comparar +", y no es >= x"
+    }
+} fin

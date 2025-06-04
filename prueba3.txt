@@ -1,42 +1,12 @@
 main {
-
-num# i = 0
-double promedio = 0.0
-boolean bandera = TRUE
-string mensaje = "Hola Mundo"
-
-while i < 3
-    imprimir> i
-    i = i + 1
-
-if bandera == TRUE
-    imprimir> mensaje
-else
-    imprimir> "Bandera falsa"
-
-for i = 0, i < 5, i = i + 1
-    imprimir> i
-
-do
-    imprimir> "Esto es un do-while"
-    i = i + 1
-while i < 10
-
-switch i
-    case 5
-        imprimir> "i vale cinco"
-    break;
-    case 10
-        imprimir> "i vale diez"
-    break;
-    case 15
-        imprimir> "i vale quince"
-    break;
-
-num| resultado = (5 + 3) * 2.25
-boolean| comparacion = resultado >= 10 & resultado <= 20
-
-if comparacion == TRUE
-    imprimir> resultado
-
+    imprimir> "Hola mundo"
+    num# contador = 10
+    boolean# activo = TRUE
+    string# saludo = "Buenos días"
+    double# precio = 19
+    if (contador = 10 & precio = 10 | precio = 20 ) {
+        imprimir> saludo
+    } else {
+        imprimir> "Contador menor" 
+    }
 } fin

@@ -1,0 +1,14 @@
+inicio {
+    2num ¿ 23
+    cadena# = 'holaaaaaaa2'
+    boolean# = true;
+    _imprimir> "Buenas a todos"
+    double# = 29.5
+
+    int# vector = [1,2,3,4,5]
+    // Comentario
+    for (i = 0, i < 10, i + 1) {
+        imprimir> i
+    }
+
+} fin

@@ -12,7 +12,7 @@ operadores_aritmeticos = ['=', '+', '-', '*', '/']
 simbolos_agrupacion = ['(', ')', '{', '}', '[', ']']
 
 # Expresiones regulares
-regex_identificador = r'^[a-zA-Z_][a-zA-Z0-9_]*$'
+regex_identificador = r'^[a-zA-Z][a-zA-Z0-9_]*$'
 regex_numero = r'^[0-9]+$'
 regex_cadena = r'^"[^"]*"$'
 regex_decimal = r'^\d+\.\d+$'
@@ -58,7 +58,7 @@ def analizar_archivo(nombre_archivo):
                     r'==|!=|<=|>=|[=+\-*/<>&|]|'                    # Operadores
                     r'[\(\)\{\}\[\]]|'                              # Agrupadores
                     r'\d+\.\d+|\d+|'                                # Números
-                    r'[a-zA-Z_][a-zA-Z0-9_]*|'                      # Identificadores
+                    r'[a-zA-Z][a-zA-Z0-9_]*|'                       # Identificadores
                     r'\S+'                                          # Cualquier otra secuencia no reconocida
                     r')'
                 )
