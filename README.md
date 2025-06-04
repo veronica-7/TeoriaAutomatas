@@ -55,27 +55,27 @@ Este lenguaje reconoce las siguientes categorías léxicas:
 ---
 
 ## 📘 Sintaxis de Cada Instrucción
-### 🟦 Declaración de Variables
+### Declaración de Variables
 
 ```plaintext
 <tipo_dato> <identificador>
 ```
-### 🟨 Asignación de Variables
+### Asignación de Variables
 
 ```plaintext
 <identificador> = <valor>
 ```
-### 🟩 Impresión de Datos
+### Impresión de Datos
 ```plaintext
 imprimir> <valor | identificador>
 ```
-### 🟥 Estructura Principal del Programa
+### Estructura Principal del Programa
 ```plaintext
 main {
     // instrucciones
 } fin
 ```
-### 🟪 Condicionales
+### Condicionales
 ```plaintext
 if (<condición>) {
     // instrucciones
